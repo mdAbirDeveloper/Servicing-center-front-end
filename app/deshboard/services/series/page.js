@@ -45,7 +45,7 @@ const AddSeries = () => {
   // Check Admin
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user") || "null");
-    if (!storedUser || storedUser.admin?.role !== "Admin") {
+    if (!storedUser || storedUser.admin?.role !== "Admin" || storedUser.admin?.isApprove !== true) {
       router.push("/component/authentication/login");
     } else {
       setUser(storedUser);
@@ -247,7 +247,7 @@ const AddSeries = () => {
           {success && <p className="text-green-500">{success}</p>}
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <div>
-              <Label htmlFor="seriesName">Series Name</Label>
+              <Label className="mb-1.5" htmlFor="seriesName">Series Name</Label>
               <Input
                 id="seriesName"
                 value={seriesName}
@@ -256,7 +256,7 @@ const AddSeries = () => {
               />
             </div>
             <div>
-              <Label>Company</Label>
+              <Label className="mb-1.5">Company</Label>
               <Select
                 value={companieName}
                 onValueChange={(val) => setCompanieName(val)}
@@ -274,7 +274,7 @@ const AddSeries = () => {
               </Select>
             </div>
             <div>
-              <Label htmlFor="seriesImage">Series Image</Label>
+              <Label className="mb-1.5" htmlFor="seriesImage">Series Image</Label>
               <Input
                 id="seriesImage"
                 type="file"
@@ -322,7 +322,7 @@ const AddSeries = () => {
             </div>
           ) : (
             <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead className="bg-gray-100 dark:bg-gray-800">
+              <thead className="bg-primary text-white">
                 <tr>
                   <th className="px-4 py-2 text-left">Name</th>
                   <th className="px-4 py-2 text-left">Thumbnail</th>
@@ -374,7 +374,7 @@ const AddSeries = () => {
           </DialogHeader>
           <form onSubmit={handleUpdate} className="flex flex-col gap-4">
             <div>
-              <Label>Series Name</Label>
+              <Label className="mb-1.5">Series Name</Label>
               <Input
                 value={seriesName}
                 onChange={(e) => setSeriesName(e.target.value)}
@@ -382,7 +382,7 @@ const AddSeries = () => {
               />
             </div>
             <div>
-              <Label>Company</Label>
+              <Label className="mb-1.5">Company</Label>
               <Select
                 value={companieName}
                 onValueChange={(val) => setCompanieName(val)}
@@ -400,7 +400,7 @@ const AddSeries = () => {
               </Select>
             </div>
             <div>
-              <Label>Series Image</Label>
+              <Label className="mb-1.5">Series Image</Label>
               <Input
                 type="file"
                 accept="image/*"

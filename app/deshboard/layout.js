@@ -4,11 +4,21 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { LogOut, LayoutDashboard, Users, Settings, ChevronDown, ChevronUp } from "lucide-react";
+import {
+  LogOut,
+  LayoutDashboard,
+  Users,
+  Settings,
+  ChevronDown,
+  ChevronUp,
+  ListOrdered,
+  HandMetal,
+} from "lucide-react";
 
 export default function DashboardLayout({ children }) {
   const router = useRouter();
   const [companyOpen, setCompanyOpen] = useState(false);
+  const [ProductsOpen, setProductsOpen] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -24,10 +34,10 @@ export default function DashboardLayout({ children }) {
 
         <nav className="flex flex-col gap-3 flex-grow">
           <Link
-            href="/dashboard"
+            href="/deshboard/servicing"
             className="flex items-center gap-2 p-2 rounded hover:bg-gray-200"
           >
-            <LayoutDashboard className="w-5 h-5" /> Dashboard
+            <LayoutDashboard className="w-5 h-5" /> Servicing
           </Link>
 
           {/* Company Dropdown */}
@@ -39,7 +49,11 @@ export default function DashboardLayout({ children }) {
               <div className="flex items-center gap-2">
                 <Users className="w-5 h-5" /> Services
               </div>
-              {companyOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+              {companyOpen ? (
+                <ChevronUp className="w-4 h-4" />
+              ) : (
+                <ChevronDown className="w-4 h-4" />
+              )}
             </button>
             {companyOpen && (
               <div className="ml-6 flex flex-col gap-1 mt-1">
@@ -59,17 +73,68 @@ export default function DashboardLayout({ children }) {
                   href="/deshboard/services/model"
                   className="p-2 rounded hover:bg-gray-200 text-sm"
                 >
-                  MOdel
+                  Model
+                </Link>
+              </div>
+            )}
+          </div>
+
+          {/* Product Dropdown */}
+          <div>
+            <button
+              onClick={() => setProductsOpen(!ProductsOpen)}
+              className="flex justify-between items-center w-full gap-2 p-2 rounded hover:bg-gray-200"
+            >
+              <div className="flex items-center gap-2">
+                <HandMetal className="w-5 h-5" /> Products
+              </div>
+              {ProductsOpen ? (
+                <ChevronUp className="w-4 h-4" />
+              ) : (
+                <ChevronDown className="w-4 h-4" />
+              )}
+            </button>
+            {ProductsOpen && (
+              <div className="ml-6 flex flex-col gap-1 mt-1">
+                <Link
+                  href="/deshboard/product/add_product"
+                  className="p-2 rounded hover:bg-gray-200 text-sm"
+                >
+                  Add Product
+                </Link>
+                <Link
+                  href="/deshboard/product/all_product"
+                  className="p-2 rounded hover:bg-gray-200 text-sm"
+                >
+                  All Product
+                </Link>
+                <Link
+                  href="/deshboard/services/model"
+                  className="p-2 rounded hover:bg-gray-200 text-sm"
+                >
+                  Model
                 </Link>
               </div>
             )}
           </div>
 
           <Link
-            href="/dashboard/settings"
+            href="/deshboard/users"
             className="flex items-center gap-2 p-2 rounded hover:bg-gray-200"
           >
-            <Settings className="w-5 h-5" /> Settings
+            <Settings className="w-5 h-5" /> Users
+          </Link>
+          <Link
+            href="/deshboard/servicing/completed"
+            className="flex items-center gap-2 p-2 rounded hover:bg-gray-200"
+          >
+            <Settings className="w-5 h-5" /> completed work
+          </Link>
+          <Link
+            href="/deshboard/order/pending"
+            className="flex items-center gap-2 p-2 rounded hover:bg-gray-200"
+          >
+            <ListOrdered className="w-5 h-5" /> Orders
           </Link>
         </nav>
 

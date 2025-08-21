@@ -16,7 +16,7 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-function LogIn() {
+function AdminLogin() {
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -32,11 +32,14 @@ function LogIn() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/v1/user/login-user", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ emailOrPhone, password }),
-      });
+      const res = await fetch(
+        "http://localhost:5000/api/v1/admin/login-admin",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ emailOrPhone, password }),
+        }
+      );
 
       const data = await res.json();
 
@@ -46,11 +49,10 @@ function LogIn() {
         setSuccess("Login successful!");
         localStorage.setItem("token", data.token); // JWT save
         localStorage.setItem("user", JSON.stringify(data));
-        // user state আপডেট জানাতে event dispatch করো
         window.dispatchEvent(new Event("userLogin"));
 
         // Refresh এর বদলে সরাসরি redirect করো
-        router.push("/");
+        router.push("/deshboard");
       }
     } catch (err) {
       setError(err.message || "Something went wrong");
@@ -124,4 +126,4 @@ function LogIn() {
   );
 }
 
-export default LogIn;
+export default AdminLogin;

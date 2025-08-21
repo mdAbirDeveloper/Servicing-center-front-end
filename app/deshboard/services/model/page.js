@@ -38,7 +38,6 @@ const AddModel = () => {
   const [imageFile, setImageFile] = useState(null);
 
   // Data states
-  const [user, setUser] = useState(null);
   const [companies, setCompanies] = useState([]);
   const [seriesList, setSeriesList] = useState([]);
   const [models, setModels] = useState([]);
@@ -49,11 +48,12 @@ const AddModel = () => {
   const [success, setSuccess] = useState("");
   const [editModel, setEditModel] = useState(null);
   const [editModalOpen, setEditModalOpen] = useState(false);
-
+  
   // Check Admin
+  const [user, setUser] = useState(null);
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user") || "null");
-    if (!storedUser || storedUser.admin?.role !== "Admin") {
+    if (!storedUser || storedUser.admin?.role !== "Admin" || storedUser.admin?.isApprove !== true) {
       router.push("/component/authentication/login");
     } else {
       setUser(storedUser);
@@ -270,7 +270,7 @@ const AddModel = () => {
           {success && <p className="text-green-500">{success}</p>}
           <form onSubmit={handleAddModel} className="flex flex-col gap-4">
             <div>
-              <Label>Company Name</Label>
+              <Label className="mb-1.5">Company Name</Label>
               <Select value={selectedCompanyName} onValueChange={handleCompanyChange}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select company" />
@@ -285,7 +285,7 @@ const AddModel = () => {
               </Select>
             </div>
             <div>
-              <Label>Series</Label>
+              <Label className="mb-1.5">Series</Label>
               <Select
                 value={selectedSeries}
                 onValueChange={(val) => setSelectedSeries(val)}
@@ -303,7 +303,7 @@ const AddModel = () => {
               </Select>
             </div>
             <div>
-              <Label>Model Name</Label>
+              <Label className="mb-1.5">Model Name</Label>
               <Input
                 value={modelName}
                 onChange={(e) => setModelName(e.target.value)}
@@ -311,7 +311,7 @@ const AddModel = () => {
               />
             </div>
             <div>
-              <Label>Model Image</Label>
+              <Label className="mb-1.5">Model Image</Label>
               <Input
                 type="file"
                 accept="image/*"
@@ -357,7 +357,7 @@ const AddModel = () => {
             </div>
           ) : (
             <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead className="bg-gray-100 dark:bg-gray-800">
+              <thead className="bg-primary text-white">
                 <tr>
                   <th className="px-4 py-2 text-left">Model Name</th>
                   <th className="px-4 py-2 text-left">Thumbnail</th>
@@ -408,7 +408,7 @@ const AddModel = () => {
           </DialogHeader>
           <form onSubmit={handleUpdate} className="flex flex-col gap-4">
             <div>
-              <Label>Company Name</Label>
+              <Label className="mb-1.5">Company Name</Label>
               <Select
                 value={selectedCompanyName}
                 onValueChange={handleCompanyChange}
@@ -426,7 +426,7 @@ const AddModel = () => {
               </Select>
             </div>
             <div>
-              <Label>Series</Label>
+              <Label className="mb-1.5">Series</Label>
               <Select
                 value={selectedSeries}
                 onValueChange={(val) => setSelectedSeries(val)}
@@ -444,7 +444,7 @@ const AddModel = () => {
               </Select>
             </div>
             <div>
-              <Label>Model Name</Label>
+              <Label className="mb-1.5">Model Name</Label>
               <Input
                 value={modelName}
                 onChange={(e) => setModelName(e.target.value)}
@@ -452,7 +452,7 @@ const AddModel = () => {
               />
             </div>
             <div>
-              <Label>Model Image</Label>
+              <Label className="mb-1.5">Model Image</Label>
               <Input
                 type="file"
                 accept="image/*"

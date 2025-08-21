@@ -71,29 +71,39 @@ export function NavigationMenuDemo() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [user, setUser] = useState(null);
-    const router = useRouter();
+  const router = useRouter();
 
   const toggleDropdown = (menu) => {
     setOpenDropdown(openDropdown === menu ? null : menu);
   };
 
+  // 🔥 keep user state in sync with localStorage
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       try {
-        const parsedUser = JSON.parse(storedUser);
-        setUser(parsedUser);
+        setUser(JSON.parse(storedUser));
       } catch (err) {
         console.error("Invalid user data in localStorage");
       }
     }
+
+    const handleUserLogin = () => {
+      const updatedUser = localStorage.getItem("user");
+      if (updatedUser) setUser(JSON.parse(updatedUser));
+    };
+
+    window.addEventListener("userLogin", handleUserLogin);
+
+    return () => {
+      window.removeEventListener("userLogin", handleUserLogin);
+    };
   }, []);
 
   const handleSignOut = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     setUser(null);
-    // তারপর login page এ redirect করুন
     router.push("/component/authentication/login");
   };
 
@@ -103,6 +113,17 @@ export function NavigationMenuDemo() {
         <div className="flex gap-2 items-center">
           <Link href="/deshboard" className="font-medium">
             <Button>Dashboard</Button>
+          </Link>
+          <Button variant="outline" onClick={handleSignOut}>
+            <LogOut className="w-4 h-4 mr-1" /> Sign Out
+          </Button>
+        </div>
+      );
+    } else if (user && user.data?.email) {
+      return (
+        <div className="flex gap-2 items-center">
+          <Link href="/deshboard" className="font-medium">
+            <Button>Profile</Button>
           </Link>
           <Button variant="outline" onClick={handleSignOut}>
             <LogOut className="w-4 h-4 mr-1" /> Sign Out

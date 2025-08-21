@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { useState } from "react";
@@ -16,9 +17,9 @@ import { Label } from "@/components/ui/label";
 import { Eye, EyeOff } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-function SignupPage() {
-  const router = useRouter();
+function AdminSignupPage() {
   const [formData, setFormData] = useState({
+    role: "Admin",
     name: "",
     phone: "",
     email: "",
@@ -53,7 +54,7 @@ function SignupPage() {
 
     try {
       const res = await fetch(
-        "http://localhost:5000/api/v1/user/create-user",
+        "http://localhost:5000/api/v1/admin/create-admin",
         {
           method: "POST",
           headers: {
@@ -65,16 +66,10 @@ function SignupPage() {
 
       if (res.ok) {
         const data = await res.json();
-        localStorage.setItem("user", JSON.stringify(data));
-        window.dispatchEvent(new Event("userLogin"));
         setMessage({
           type: "success",
-          text: "Signup successful! Redirecting...",
+          text: "Signup successful! please wait until approve you account",
         });
-
-        setTimeout(() => {
-          router.push("/");
-        }, 500);
       } else {
         const err = await res.json();
         setMessage({ type: "error", text: err.message || "Signup failed!" });
@@ -246,4 +241,4 @@ function SignupPage() {
   );
 }
 
-export default SignupPage;
+export default AdminSignupPage;
