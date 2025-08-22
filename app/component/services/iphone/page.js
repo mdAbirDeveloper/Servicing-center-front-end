@@ -275,7 +275,7 @@ export default function IPhoneServicePage() {
                 </p>
                 <div className="card-actions mt-4">
                   <button
-                    className="btn btn-primary"
+                    className="btn bg-primary text-white"
                     onClick={() => setSelectedSeries(seriesObj)}
                   >
                     View Models
@@ -326,7 +326,7 @@ export default function IPhoneServicePage() {
                   <div className="card-actions mt-4">
                     <button
                       className={`btn ${
-                        openModel === model.name ? "btn-error" : "btn-primary"
+                        openModel === model.name ? "btn-error" : "bg-primary text-white"
                       }`}
                       onClick={() => toggleDropdown(model.name)}
                     >

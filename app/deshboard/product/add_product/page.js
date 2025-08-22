@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -41,16 +40,15 @@ const AddProduct = () => {
   const categories = [
     "Headphone",
     "Speaker",
-    "Protector Glass",
-    "iPhone Parts",
-    "Android Phone Parts",
+    "Protector_Glass",
+    "iPhone_Parts",
+    "Android_Phone_Parts",
     "Charger",
-    "Power Bank",
-    "Smart Watch",
+    "Power_Bank",
+    "Smart_Watch",
   ];
 
 const companies = [
-  // Phone manufacturers
   "Apple",
   "Samsung",
   "Xiaomi",
@@ -168,19 +166,19 @@ const companies = [
       if (!res.ok) setError(data.message || "Failed to add product");
       else {
         setSuccess("Product added successfully!");
-        setFormData({
-          category: "",
-          company: "",
-          name: "",
-          title: "",
-          description: "",
-          price: "",
-          discountPrice: "",
-          quantity: "",
-          image: "",
-          thumbnail: "",
-          deleteUrl: "",
-        });
+        // setFormData({
+        //   category: "",
+        //   company: "",
+        //   name: "",
+        //   title: "",
+        //   description: "",
+        //   price: "",
+        //   discountPrice: "",
+        //   quantity: "",
+        //   image: "",
+        //   thumbnail: "",
+        //   deleteUrl: "",
+        // });
         setImageFile(null);
       }
     } catch (err) {

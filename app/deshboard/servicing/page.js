@@ -1,10 +1,11 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const Servicing = () => {
   const [servicingData, setServicingData] = useState([]);
-
+  const router = useRouter();
   // modal state
   const [openModal, setOpenModal] = useState(false);
   const [modalAction, setModalAction] = useState(null);
