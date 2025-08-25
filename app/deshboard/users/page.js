@@ -1,15 +1,21 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
+
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation"; // ✅ এটা লাগবে
 
 const AllUsers = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  //admin check
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
+
+  const router = useRouter();
+
+  // ✅ localStorage থেকে user + token শুধু client-side এ পড়া হবে
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user") || "null");
+
     if (
       !storedUser ||
       storedUser.admin?.role !== "Admin" ||
@@ -18,13 +24,11 @@ const AllUsers = () => {
       router.push("/component/authentication/login");
     } else {
       setUser(storedUser);
+      setToken(storedUser.token || null);
     }
-  }, []);
+  }, [router]);
 
-  // localStorage থেকে admin data এবং token নেওয়া
-  const adminData = JSON.parse(localStorage.getItem("user"));
-  const token = adminData?.token;
-
+  // ✅ token available হলে users ফেচ করবো
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -34,14 +38,12 @@ const AllUsers = () => {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`, // টোকেন যাচাই
+              Authorization: `Bearer ${token}`,
             },
           }
         );
 
-        if (!res.ok) {
-          throw new Error("Failed to fetch users");
-        }
+        if (!res.ok) throw new Error("Failed to fetch users");
 
         const data = await res.json();
         setUsers(data.data || []);
@@ -58,14 +60,16 @@ const AllUsers = () => {
   }, [token]);
 
   if (loading) {
-    return <div className="flex justify-center items-center min-h-screen">
+    return (
+      <div className="flex justify-center items-center min-h-screen">
         <div className="flex flex-col items-center">
           <div className="w-16 h-16 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
           <p className="mt-4 text-gray-700 text-lg font-medium">
             Loading dashboard...
           </p>
         </div>
-      </div>;
+      </div>
+    );
   }
 
   return (
@@ -84,29 +88,29 @@ const AllUsers = () => {
           </thead>
           <tbody className="text-center">
             {users.length > 0 ? (
-              users.map((user, index) => (
-                <tr key={user._id} className="hover:bg-gray-50">
+              users.map((u, index) => (
+                <tr key={u._id} className="hover:bg-gray-50">
                   <td className="border border-gray-300 px-4 py-2">
                     {index + 1}
                   </td>
                   <td className="border border-gray-300 px-4 py-2">
-                    {user.name}
+                    {u.name}
                   </td>
                   <td className="border border-gray-300 px-4 py-2">
-                    {user.phone}
+                    {u.phone}
                   </td>
                   <td className="border border-gray-300 px-4 py-2">
-                    {user.email}
+                    {u.email}
                   </td>
                   <td className="border border-gray-300 px-4 py-2">
-                    {new Date(user.createdAt).toLocaleDateString()}
+                    {new Date(u.createdAt).toLocaleDateString()}
                   </td>
                 </tr>
               ))
             ) : (
               <tr>
                 <td
-                  colSpan="5"
+                  colSpan={5}
                   className="text-center border border-gray-300 px-4 py-2"
                 >
                   No users found
