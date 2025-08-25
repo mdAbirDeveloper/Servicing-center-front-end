@@ -113,7 +113,7 @@ export default function Products() {
   // 🔹 Fetch products
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:5000/api/v1/product/all-products`)
+    fetch(`https://servicing-center-server.vercel.app/api/v1/product/all-products`)
       .then((res) => res.json())
       .then((data) => {
         setCategoryData(data.data || []);

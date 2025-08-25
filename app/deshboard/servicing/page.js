@@ -31,7 +31,7 @@ const Servicing = () => {
     const fetchData = async () => {
       try {
         const res = await fetch(
-          "http://localhost:5000/api/v1/repair/pending-repair"
+          "https://servicing-center-server.vercel.app/api/v1/repair/pending-repair"
         );
         const data = await res.json();
         setServicingData(data.data);
@@ -50,13 +50,13 @@ const Servicing = () => {
     let status = "";
 
     if (modalAction === "recived") {
-      endpoint = `http://localhost:5000/api/v1/repair/recived/${selectedId}`;
+      endpoint = `https://servicing-center-server.vercel.app/api/v1/repair/recived/${selectedId}`;
       status = "received";
     } else if (modalAction === "inService") {
-      endpoint = `http://localhost:5000/api/v1/repair/inService/${selectedId}`;
+      endpoint = `https://servicing-center-server.vercel.app/api/v1/repair/inService/${selectedId}`;
       status = "inService";
     } else if (modalAction === "delivered") {
-      endpoint = `http://localhost:5000/api/v1/repair/delivered/${selectedId}`;
+      endpoint = `https://servicing-center-server.vercel.app/api/v1/repair/delivered/${selectedId}`;
       status = "delivered";
     }
 

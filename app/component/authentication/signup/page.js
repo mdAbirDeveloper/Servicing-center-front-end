@@ -53,7 +53,7 @@ function SignupPage() {
 
     try {
       const res = await fetch(
-        "http://localhost:5000/api/v1/user/create-user",
+        "https://servicing-center-server.vercel.app/api/v1/user/create-user",
         {
           method: "POST",
           headers: {

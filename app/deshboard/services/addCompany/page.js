@@ -36,7 +36,7 @@ const AddCompany = () => {
   // Admin access check
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
-    if (!storedUser || storedUser.admin?.role !== "Admin") {
+    if (!storedUser || storedUser.admin?.role !== "Admin" || storedUser.admin.isApprove !== true) {
       router.push("/component/authentication/login");
     } else {
       setUser(storedUser);
@@ -48,7 +48,7 @@ const AddCompany = () => {
   const fetchCompanies = async () => {
     try {
       const res = await fetch(
-        "http://localhost:5000/api/v1/company/all-company",
+        "https://servicing-center-server.vercel.app/api/v1/company/all-company",
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
@@ -96,7 +96,7 @@ const AddCompany = () => {
     try {
       const imageUrl = await uploadImage(imageFile);
       const res = await fetch(
-        "http://localhost:5000/api/v1/company/add-company",
+        "https://servicing-center-server.vercel.app/api/v1/company/add-company",
         {
           method: "POST",
           headers: {
@@ -138,7 +138,7 @@ const AddCompany = () => {
       const encodedDeleteUrl = encodeURIComponent(company.image.deleteUrl);
 
       const res = await fetch(
-        `http://localhost:5000/api/v1/company/delete/${company._id}?deleteUrl=${encodedDeleteUrl}`,
+        `https://servicing-center-server.vercel.app/api/v1/company/delete/${company._id}?deleteUrl=${encodedDeleteUrl}`,
         {
           method: "DELETE",
           headers: {
@@ -173,7 +173,7 @@ const AddCompany = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/v1/company/update/${editCompany._id}`,
+        `https://servicing-center-server.vercel.app/api/v1/company/update/${editCompany._id}`,
         {
           method: "PUT",
           headers: {

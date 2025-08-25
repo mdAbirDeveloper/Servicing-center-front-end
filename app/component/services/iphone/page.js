@@ -186,7 +186,7 @@ export default function IPhoneServicePage() {
 
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/v1/repair/repair-request", {
+      const res = await fetch("https://servicing-center-server.vercel.app/api/v1/repair/repair-request", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

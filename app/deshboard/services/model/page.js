@@ -66,7 +66,7 @@ const AddModel = () => {
   const fetchCompanies = async () => {
     try {
       const res = await fetch(
-        "http://localhost:5000/api/v1/company/all-company",
+        "https://servicing-center-server.vercel.app/api/v1/company/all-company",
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
@@ -83,7 +83,7 @@ const AddModel = () => {
     try {
       setLoading(true);
       const res = await fetch(
-        `http://localhost:5000/api/v1/series/company-name/${companyName}`,
+        `https://servicing-center-server.vercel.app/api/v1/series/company-name/${companyName}`,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
@@ -101,7 +101,7 @@ const AddModel = () => {
   const fetchModels = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/v1/model/all-models", {
+      const res = await fetch("https://servicing-center-server.vercel.app/api/v1/model/all-models", {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       const data = await res.json();
@@ -149,7 +149,7 @@ const AddModel = () => {
     setLoading(true);
     try {
       const imageUrl = await uploadImage(imageFile);
-      const res = await fetch("http://localhost:5000/api/v1/model/add-model", {
+      const res = await fetch("https://servicing-center-server.vercel.app/api/v1/model/add-model", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -205,7 +205,7 @@ const AddModel = () => {
       if (imageFile) updatedImage = await uploadImage(imageFile);
 
       const res = await fetch(
-        `http://localhost:5000/api/v1/model/update/${editModel._id}`,
+        `https://servicing-center-server.vercel.app/api/v1/model/update/${editModel._id}`,
         {
           method: "PUT",
           headers: {
@@ -241,7 +241,7 @@ const AddModel = () => {
     try {
       const encodedDeleteUrl = encodeURIComponent(modelItem.image.deleteUrl);
       const res = await fetch(
-        `http://localhost:5000/api/v1/model/delete/${modelItem._id}?deleteUrl=${encodedDeleteUrl}`,
+        `https://servicing-center-server.vercel.app/api/v1/model/delete/${modelItem._id}?deleteUrl=${encodedDeleteUrl}`,
         {
           method: "DELETE",
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },

@@ -52,7 +52,7 @@ export default function CategoryPage({ params }) {
   useEffect(() => {
     if (name) {
       setLoading(true);
-      fetch(`http://localhost:5000/api/v1/product/categories/${name}`)
+      fetch(`https://servicing-center-server.vercel.app/api/v1/product/categories/${name}`)
         .then((res) => res.json())
         .then((data) => {
           setCategoryData(data.data || []);

@@ -54,7 +54,7 @@ function AdminSignupPage() {
 
     try {
       const res = await fetch(
-        "http://localhost:5000/api/v1/admin/create-admin",
+        "https://servicing-center-server.vercel.app/api/v1/admin/create-admin",
         {
           method: "POST",
           headers: {

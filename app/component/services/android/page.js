@@ -62,7 +62,7 @@ export default function AndroidServicePage() {
     const fetchCompanies = async () => {
       try {
         const res = await fetch(
-          "http://localhost:5000/api/v1/company/all-company"
+          "https://servicing-center-server.vercel.app/api/v1/company/all-company"
         );
         const data = await res.json();
         setCompanies(data.data);
@@ -80,7 +80,7 @@ export default function AndroidServicePage() {
     setModelsList([]);
     try {
       const res = await fetch(
-        `http://localhost:5000/api/v1/series/company-name/${company}`
+        `https://servicing-center-server.vercel.app/api/v1/series/company-name/${company}`
       );
       const data = await res.json();
       setSeriesList(data.data);
@@ -94,7 +94,7 @@ export default function AndroidServicePage() {
     setSelectedSeries(series);
     try {
       const res = await fetch(
-        `http://localhost:5000/api/v1/model/series-name/${series}`
+        `https://servicing-center-server.vercel.app/api/v1/model/series-name/${series}`
       );
       const data = await res.json();
       setModelsList(data.data);
@@ -144,7 +144,7 @@ export default function AndroidServicePage() {
       };
 
       const res = await fetch(
-        "http://localhost:5000/api/v1/repair/repair-request",
+        "https://servicing-center-server.vercel.app/api/v1/repair/repair-request",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -181,7 +181,8 @@ export default function AndroidServicePage() {
   return (
     <div className="mx-auto p-4 max-w-[1400px]">
       <h1 className="text-3xl font-bold mb-6 text-center">
-        {selectedCompany ? selectedCompany + " Series" : "Android Service"}
+        {selectedCompany ? selectedCompany + " Company " : "Android Service"}
+        {selectedSeries && selectedSeries + " Models" }
       </h1>
 
       {/* 🔹 Flash Message */}

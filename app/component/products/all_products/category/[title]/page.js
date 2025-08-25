@@ -56,7 +56,7 @@ export default function CategoryPage({ params }) {
 
     setLoading(true);
     fetch(
-      `http://localhost:5000/api/v1/product/category-products?category=${category}`
+      `https://servicing-center-server.vercel.app/api/v1/product/category-products?category=${category}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -81,7 +81,14 @@ export default function CategoryPage({ params }) {
     setShowCompanies(false);
   };
 
-  if (loading) return <p className="text-center mt-10">Loading...</p>;
+  if (loading) return <div className="flex justify-center items-center min-h-screen">
+        <div className="flex flex-col items-center">
+          <div className="w-16 h-16 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
+          <p className="mt-4 text-gray-700 text-lg font-medium">
+            Loading dashboard...
+          </p>
+        </div>
+      </div>;
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">

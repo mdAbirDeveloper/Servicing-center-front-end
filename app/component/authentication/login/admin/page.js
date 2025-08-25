@@ -33,7 +33,7 @@ function AdminLogin() {
 
     try {
       const res = await fetch(
-        "http://localhost:5000/api/v1/admin/login-admin",
+        "https://servicing-center-server.vercel.app/api/v1/admin/login-admin",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

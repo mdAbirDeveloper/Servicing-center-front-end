@@ -32,7 +32,7 @@ function LogIn() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/v1/user/login-user", {
+      const res = await fetch("https://servicing-center-server.vercel.app/api/v1/user/login-user", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ emailOrPhone, password }),

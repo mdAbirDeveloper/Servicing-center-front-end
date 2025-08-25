@@ -108,7 +108,7 @@ const AllProducts = () => {
   const fetchProducts = async () => {
     try {
       const res = await fetch(
-        "http://localhost:5000/api/v1/product/all-products",
+        "https://servicing-center-server.vercel.app/api/v1/product/all-products",
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
@@ -145,7 +145,7 @@ const AllProducts = () => {
     try {
       const encodedDeleteUrl = encodeURIComponent(product.image.deleteUrl);
       const res = await fetch(
-        `http://localhost:5000/api/v1/product/delete/${product._id}?deleteUrl=${encodedDeleteUrl}`,
+        `https://servicing-center-server.vercel.app/api/v1/product/delete/${product._id}?deleteUrl=${encodedDeleteUrl}`,
         {
           method: "DELETE",
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -186,7 +186,7 @@ const AllProducts = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/v1/product/update/${editProduct._id}`,
+        `https://servicing-center-server.vercel.app/api/v1/product/update/${editProduct._id}`,
         {
           method: "PUT",
           headers: {
@@ -241,8 +241,12 @@ const AllProducts = () => {
                 <tr key={p._id}>
                   <td className="px-4 border border-primary py-2">{p.name}</td>
                   <td className="px-4 border border-primary py-2">{p.price}</td>
-                  <td className="px-4 border border-primary py-2">{p.discountPrice}</td>
-                  <td className="px-4 border border-primary py-2">{p.quantity}</td>
+                  <td className="px-4 border border-primary py-2">
+                    {p.discountPrice}
+                  </td>
+                  <td className="px-4 border border-primary py-2">
+                    {p.quantity}
+                  </td>
                   <td className="px-4 border border-primary py-2">
                     <img
                       src={p.image.thumbnail}
@@ -251,7 +255,7 @@ const AllProducts = () => {
                     />
                   </td>
                   <td className="px-4 py-5 flex gap-2 justify-around border">
-                    <Button onClick={() => openEditModal(p)} >Update</Button>
+                    <Button onClick={() => openEditModal(p)}>Update</Button>
                     <Button
                       className="bg-red-500 text-white"
                       onClick={() => handleDelete(p)}
@@ -407,7 +411,7 @@ const AllProducts = () => {
                 {loading ? "Updating..." : "Update"}
               </Button>
               <Button
-              type="button"
+                type="button"
                 variant="outline"
                 onClick={() => setEditModalOpen(false)}
                 className="w-full sm:w-auto"

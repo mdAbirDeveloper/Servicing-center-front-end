@@ -3,18 +3,12 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
 const AddProduct = () => {
-  const router = useRouter();
   const [formData, setFormData] = useState({
     category: "",
     company: "",
@@ -37,6 +31,21 @@ const AddProduct = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
+  const router = useRouter();
+  // Admin check
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (
+      !storedUser ||
+      storedUser.admin?.role !== "Admin" ||
+      storedUser.admin.isApprove !== true
+    ) {
+      router.push("/component/authentication/login");
+    } else {
+      setUser(storedUser);
+    }
+  }, []);
+
   const categories = [
     "Headphone",
     "Speaker",
@@ -48,53 +57,42 @@ const AddProduct = () => {
     "Smart_Watch",
   ];
 
-const companies = [
-  "Apple",
-  "Samsung",
-  "Xiaomi",
-  "Realme",
-  "Oppo",
-  "Vivo",
-  "OnePlus",
-  "Nokia",
-  "Sony",
-  "Huawei",
-  "Motorola",
-  "LG",
-  "Asus",
-  "Lenovo",
-  "Tecno",
-  "Itel",
-  "Infinix",
-  "Google",
-  "Oraimo",
-  "Anker",
-  "JBL",
-  "Sony Accessories",
-  "Bose",
-  "Skullcandy",
-  "Sennheiser",
-  "Remax",
-  "Baseus",
-  "Ugreen",
-  "Xcentz",
-  "Spigen",
-  "OtterBox",
-  "Caseology",
-  "Ringke",
-  "Other",
-];
-
-
-  // Admin check
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    if (!storedUser || storedUser.admin?.role !== "Admin") {
-      router.push("/component/authentication/login");
-    } else {
-      setUser(storedUser);
-    }
-  }, []);
+  const companies = [
+    "Apple",
+    "Samsung",
+    "Xiaomi",
+    "Realme",
+    "Oppo",
+    "Vivo",
+    "OnePlus",
+    "Nokia",
+    "Sony",
+    "Huawei",
+    "Motorola",
+    "LG",
+    "Asus",
+    "Lenovo",
+    "Tecno",
+    "Itel",
+    "Infinix",
+    "Google",
+    "Oraimo",
+    "Anker",
+    "JBL",
+    "Sony Accessories",
+    "Bose",
+    "Skullcandy",
+    "Sennheiser",
+    "Remax",
+    "Baseus",
+    "Ugreen",
+    "Xcentz",
+    "Spigen",
+    "OtterBox",
+    "Caseology",
+    "Ringke",
+    "Other",
+  ];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -139,7 +137,7 @@ const companies = [
       const uploaded = await uploadImage(imageFile);
 
       const res = await fetch(
-        "http://localhost:5000/api/v1/product/add-product",
+        "https://servicing-center-server.vercel.app/api/v1/product/add-product",
         {
           method: "POST",
           headers: {
@@ -202,7 +200,9 @@ const companies = [
             className="grid grid-cols-1 md:grid-cols-2 gap-4"
           >
             <div>
-              <Label className="mb-1.5" htmlFor="category">Category</Label>
+              <Label className="mb-1.5" htmlFor="category">
+                Category
+              </Label>
               <select
                 id="category"
                 name="category"
@@ -221,7 +221,9 @@ const companies = [
             </div>
 
             <div>
-              <Label className="mb-1.5" htmlFor="company">Company</Label>
+              <Label className="mb-1.5" htmlFor="company">
+                Company
+              </Label>
               <select
                 id="company"
                 name="company"
@@ -240,7 +242,9 @@ const companies = [
             </div>
 
             <div>
-              <Label className="mb-1.5" htmlFor="name">Product Name</Label>
+              <Label className="mb-1.5" htmlFor="name">
+                Product Name
+              </Label>
               <Input
                 id="name"
                 name="name"
@@ -251,7 +255,9 @@ const companies = [
             </div>
 
             <div>
-              <Label className="mb-1.5" htmlFor="title">Title</Label>
+              <Label className="mb-1.5" htmlFor="title">
+                Title
+              </Label>
               <Input
                 id="title"
                 name="title"
@@ -262,7 +268,9 @@ const companies = [
             </div>
 
             <div className="md:col-span-2">
-              <Label className="mb-1.5" htmlFor="description">Description</Label>
+              <Label className="mb-1.5" htmlFor="description">
+                Description
+              </Label>
               <textarea
                 id="description"
                 name="description"
@@ -275,7 +283,9 @@ const companies = [
             </div>
 
             <div>
-              <Label className="mb-1.5" htmlFor="price">Price</Label>
+              <Label className="mb-1.5" htmlFor="price">
+                Price
+              </Label>
               <Input
                 type="number"
                 id="price"
@@ -287,7 +297,9 @@ const companies = [
             </div>
 
             <div>
-              <Label className="mb-1.5" htmlFor="discountPrice">Discount Price (Optional)</Label>
+              <Label className="mb-1.5" htmlFor="discountPrice">
+                Discount Price (Optional)
+              </Label>
               <Input
                 type="number"
                 id="discountPrice"
@@ -298,7 +310,9 @@ const companies = [
             </div>
 
             <div>
-              <Label className="mb-1.5" htmlFor="quantity">Quantity</Label>
+              <Label className="mb-1.5" htmlFor="quantity">
+                Quantity
+              </Label>
               <Input
                 type="number"
                 id="quantity"
@@ -310,7 +324,9 @@ const companies = [
             </div>
 
             <div className="">
-              <Label className="mb-1.5" htmlFor="image">Product Image</Label>
+              <Label className="mb-1.5" htmlFor="image">
+                Product Image
+              </Label>
               <Input
                 type="file"
                 id="image"
