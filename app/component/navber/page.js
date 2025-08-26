@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable jsx-a11y/alt-text */
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -11,6 +13,7 @@ import {
   ChevronRight,
   ShoppingCart,
 } from "lucide-react";
+
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -128,7 +131,9 @@ export function NavigationMenuDemo() {
     <div className="max-w-[1400px] mx-auto p-2 relative z-50">
       {/* Mobile Header */}
       <div className="flex items-center justify-between md:hidden">
-        <Button>Brand</Button>
+        <Link href={"/"}>
+        <img className="h-10 rounded-2xl" src={"/logo.png"} />
+        </Link>
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="p-2"
@@ -139,7 +144,9 @@ export function NavigationMenuDemo() {
 
       {/* Desktop Menu */}
       <div className="hidden md:flex justify-between items-center">
-        <Button>Brand</Button>
+        <Link href={"/"}>
+        <img className="h-10 rounded-2xl" src={"/logo.png"} />
+        </Link>
         <NavigationMenu className="ml-28" viewport={false}>
           <NavigationMenuList>
             <NavigationMenuItem>

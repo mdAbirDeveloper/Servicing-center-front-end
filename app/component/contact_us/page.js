@@ -68,23 +68,35 @@ export default function ContactUs() {
           <div className="flex flex-col items-center p-4 bg-gray-100 rounded-lg shadow-sm">
             <MapPin className="text-blue-600 mb-2" size={28} />
             <h3 className="font-semibold">Address</h3>
-            <p className="text-sm text-gray-600 text-center">
-              123, Dhaka, Bangladesh
-            </p>
+            <a
+              href="https://www.google.com/maps?q=Shah+Ali+plaza,+Mirpur-10,+Dhaka,+Bangladesh"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-gray-600 text-center"
+            >
+              <span>Shah Ali plaza, Mirpur-10, Dhaka, Bangladesh</span>
+            </a>
           </div>
           <div className="flex flex-col items-center p-4 bg-gray-100 rounded-lg shadow-sm">
             <Mail className="text-blue-600 mb-2" size={28} />
             <h3 className="font-semibold">Email</h3>
-            <p className="text-sm text-gray-600 text-center">
+            <a
+              href="mailto:support@example.com"
+              className="text-sm text-gray-600 text-center hover:text-blue-600 transition"
+            >
               support@example.com
-            </p>
+            </a>
           </div>
+
           <div className="flex flex-col items-center p-4 bg-gray-100 rounded-lg shadow-sm">
             <Phone className="text-blue-600 mb-2" size={28} />
             <h3 className="font-semibold">Phone</h3>
-            <p className="text-sm text-gray-600 text-center">
-              +880 1234-567890
-            </p>
+            <a
+              href="tel:+8801234567890"
+              className="text-sm text-gray-600 text-center hover:text-blue-600 transition"
+            >
+              +880 1791-421041
+            </a>
           </div>
         </div>
 

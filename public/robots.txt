@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://repair-wala.vercel.app/
+
+# Sitemaps
+Sitemap: https://repair-wala.vercel.app/sitemap.xml
