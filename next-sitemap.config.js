@@ -1,8 +1,15 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: 'https://repair-wala.vercel.app/', // তোমার site URL
-  generateRobotsTxt: true, // robots.txt generate হবে
-  sitemapSize: 5000, // sitemap size limit
+  siteUrl: 'https://www.codeshinetechnology.com',
+  generateRobotsTxt: true,
+  sitemapSize: 5000,
+  
+  // ❌ যেসব path sitemap এ add করতে চাও না
+  exclude: [
+    '/component/authentication/*',
+    '/deshboard/*',
+  ],
+
   changefreq: 'weekly',
   priority: 0.7,
 };
