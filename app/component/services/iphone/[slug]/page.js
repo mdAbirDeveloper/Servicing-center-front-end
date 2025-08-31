@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -201,7 +202,7 @@ export default function IPhoneModelPage({ params }) {
           {flash.text}
         </div>
       )}
-      <div className="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-1 gap-6">
+      <div className="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-6">
         {models.map((model, idx) => (
           <div
             key={idx}
@@ -216,12 +217,12 @@ export default function IPhoneModelPage({ params }) {
                 className={`btn ${openModel === model.name ? "btn-error" : "bg-primary text-white"} mt-4`}
                 onClick={() => toggleDropdown(model.name)}
               >
-                {openModel === model.name ? "Hide Problems" : "Select Model"}
+                {openModel === model.name ? "Hide_Problems" : "Select_Model"}
               </button>
 
               {openModel === model.name && (
                 <div className="mt-4 w-full text-left">
-                  <label className="block mb-2 text-sm font-medium text-gray-700">Select Problem</label>
+                  <label className="block mb-2 text-sm font-medium text-gray-700">Select_Problem</label>
                   <select
                     className="select bg-white select-bordered w-full"
                     value={selectedProblem[model.name] || ""}
@@ -261,7 +262,7 @@ export default function IPhoneModelPage({ params }) {
                     className="btn btn-success w-full mt-4"
                     disabled={loading || !canShowSubmit(model.name)}
                   >
-                    {loading ? "Submitting..." : "Submit Request"}
+                    {loading ? "Submitting..." : "Submit_Request"}
                   </button>
                 </div>
               )}

@@ -49,9 +49,9 @@ export default function ContactUs() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center min-h-screen bg-gray-50 p-6">
+    <div className="flex flex-col md:flex-row max-w-[1400px] mx-auto items-center justify-center min-h-screen bg-gray-50 p-6">
       {/* Left side image */}
-      <div className="md:w-1/2 w-full mb-6 md:mb-0 flex justify-center">
+      <div className="md:w-1/2 w-full mb-6 md:mb-0 md:block hidden">
         <img
           src="https://images.unsplash.com/photo-1521791055366-0d553872125f"
           alt="Contact Us"

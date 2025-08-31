@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const iphoneSeries = [
@@ -18,12 +19,15 @@ const iphoneSeries = [
 
 export default function IPhoneSeriesPage() {
   const router = useRouter();
+  const [showAll, setShowAll] = useState(false);
+
+  const displayedSeries = showAll ? [...iphoneSeries].reverse() : [...iphoneSeries].reverse().slice(0, 6);
 
   return (
     <div className="mx-auto p-4 max-w-[1400px]">
-      <h1 className="text-3xl font-bold mb-8 text-center">iPhone Service</h1>
-      <div className="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-1 gap-6">
-        {[...iphoneSeries]?.reverse().map((series, idx) => (
+      <h1 className="text-3xl font-bold mb-8 text-center">iPhone Services</h1>
+      <div className="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-6">
+        {displayedSeries.map((series, idx) => (
           <div
             key={idx}
             className="card shadow-sm border border-gray-200 hover:shadow-xl transform transition-all duration-300 hover:-translate-y-2"
@@ -34,15 +38,26 @@ export default function IPhoneSeriesPage() {
             <div className="card-body text-center">
               <h2 className="card-title">{series.series}</h2>
               <button
-                className="btn bg-primary text-white mt-4"
+                className="btn bg-primary rounded-2xl text-white mt-4"
                 onClick={() => router.push(`/component/services/iphone/${series.slug}`)}
               >
-                View Models
+                View_Models
               </button>
             </div>
           </div>
         ))}
       </div>
+
+      {iphoneSeries.length > 6 && (
+        <div className="text-center mt-8">
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className="px-6 py-3 bg-gray-800 text-white rounded-lg shadow hover:bg-gray-900 transition"
+          >
+            {showAll ? "Show Less" : "Show All"}
+          </button>
+        </div>
+      )}
     </div>
   );
 }

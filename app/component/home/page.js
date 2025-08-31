@@ -40,7 +40,7 @@ export default function HeroSection() {
             Get your devices repaired quickly and safely. We also offer the
             latest accessories and products for Apple & Android devices.
           </p>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4 relative z-10">
             <Link
               href="/component/services/iphone"
               className="bg-yellow-400 text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-yellow-500 shadow-lg transition transform hover:-translate-y-1"
@@ -49,7 +49,7 @@ export default function HeroSection() {
             </Link>
             <Link
               href="/component/services/android"
-              className="bg-white text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 shadow-lg transition transform hover:-translate-y-1"
+              className="bg-white text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 shadow-lg transition-transform duration-300 hover:-translate-y-1 pointer-events-auto"
             >
               Android Service
             </Link>

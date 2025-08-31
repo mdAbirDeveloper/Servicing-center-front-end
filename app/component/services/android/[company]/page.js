@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -136,7 +137,7 @@ export default function AndroidModelPage({ params }) {
         <div className="flex flex-col items-center">
           <div className="w-16 h-16 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
           <p className="mt-4 text-gray-700 text-lg font-medium">
-            Loading dashboard...
+ 
           </p>
         </div>
       </div>
@@ -164,7 +165,7 @@ export default function AndroidModelPage({ params }) {
       )}
 
       {!selectedSeries && (
-        <div className="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-1 gap-6">
+        <div className="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-6">
           {seriesList.map((series) => (
             <div
               key={series.id}
@@ -174,7 +175,7 @@ export default function AndroidModelPage({ params }) {
                 <img src={series.image.image} alt={series.name} className="h-40 object-contain mb-4" />
                 <h2 className="card-title">{series.name}</h2>
                 <button className="btn bg-primary text-white mt-4" onClick={() => handleSeriesSelect(series.name)}>
-                  View Models
+                  View_Models
                 </button>
               </div>
             </div>
@@ -183,7 +184,7 @@ export default function AndroidModelPage({ params }) {
       )}
 
       {selectedSeries && (
-        <div className="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-1 gap-6">
+        <div className="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-6">
           {modelsList.map((model) => (
             <div key={model.id} className="card shadow-sm border border-gray-200 hover:shadow-2xl transform transition-all duration-300 hover:-translate-y-2">
               <figure className="px-6 pt-6">
@@ -195,7 +196,7 @@ export default function AndroidModelPage({ params }) {
                   className={`btn ${openModel === model.id ? "btn-error" : "bg-primary text-white"} mt-4`}
                   onClick={() => toggleDropdown(model.id)}
                 >
-                  {openModel === model.id ? "Hide Problems" : "Select Model"}
+                  {openModel === model.id ? "Hide_Problems" : "Select_Model"}
                 </button>
 
                 {openModel === model.id && (
@@ -225,11 +226,11 @@ export default function AndroidModelPage({ params }) {
                     )}
 
                     <button
-                      className={`btn bg-primary text-white mt-3 ${loading ? "loading" : ""}`}
+                      className={`p-2 rounded-2xl bg-primary text-white mt-3 ${loading ? "loading" : ""}`}
                       onClick={() => handleSubmit(model.id, model.name)}
                       disabled={loading}
                     >
-                      Submit Request
+                      Submit_Request
                     </button>
                   </div>
                 )}

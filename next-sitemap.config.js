@@ -9,7 +9,7 @@ module.exports = {
     '/component/authentication/*',
     '/deshboard/*',
   ],
-
+  
   changefreq: 'weekly',
   priority: 0.7,
 };

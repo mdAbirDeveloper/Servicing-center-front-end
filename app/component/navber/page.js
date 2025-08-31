@@ -84,10 +84,10 @@ export function NavigationMenuDemo() {
     if (user?.admin?.role === "Admin") {
       return (
         <div className="flex gap-2 items-center">
-          <Link href="/deshboard">
+          <Link href="/deshboard" onClick={handleMobileLinkClick}>
             <Button>Dashboard</Button>
           </Link>
-          <Button variant="outline" onClick={handleSignOut}>
+          <Button variant="outline" onClick={ () => {handleSignOut(); handleMobileLinkClick();}}>
             <LogOut className="w-4 h-4 mr-1" /> Sign Out
           </Button>
         </div>
@@ -107,7 +107,7 @@ export function NavigationMenuDemo() {
           >
             <MdBuild className="text-white" />
           </Link>
-          <Button variant="outline" onClick={handleSignOut}>
+          <Button variant="outline" onClick={ () => {handleSignOut(); handleMobileLinkClick();}}>
             <LogOut className="w-4 h-4 mr-1" /> Sign Out
           </Button>
         </div>
@@ -273,7 +273,7 @@ export function NavigationMenuDemo() {
 
           {/* Contact */}
           <Link
-            href="/contact"
+            href="/component/contact_us"
             className="font-medium"
             onClick={handleMobileLinkClick}
           >

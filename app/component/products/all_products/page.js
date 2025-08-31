@@ -151,7 +151,7 @@ export default function Products() {
   return (
     <div>
       {/* 🔹 Carousel */}
-      <div className="relative w-full h-[500px] overflow-hidden">
+      <div className="relative w-full md:h-[500px] overflow-hidde">
         <div
           className="flex transition-transform duration-700 ease-in-out"
           style={{ transform: `translateX(-${current * 100}%)` }}
@@ -188,7 +188,7 @@ export default function Products() {
       </div>
 
       {/* 🔹 Categories Section */}
-      <section className="py-10 mt-10">
+      <section className="md:py-10 md:mt-20 mt-6">
         <h2 className="text-center text-2xl sm:text-3xl font-bold mb-8">
           <span className="text-orange-500">Featured</span> Categories
         </h2>
