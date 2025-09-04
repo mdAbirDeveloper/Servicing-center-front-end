@@ -1,4 +1,3 @@
-
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
@@ -44,7 +43,7 @@ const RequestsPage = () => {
 
   useEffect(() => {
     fetchRequests();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const statuses = ["pending", "received", "inService", "delivered"];
@@ -57,12 +56,29 @@ const RequestsPage = () => {
 
       {loading ? (
         <div className="flex justify-center items-center h-64">
-          <div className="w-12 h-12 border-4 border-transparent border-t-primary border-l-primary rounded-full animate-spin"></div>
+          <div className="flex justify-center items-center h-64">
+            {/* Modern Stylish Loading Spinner */}
+            <div className="flex justify-center items-center h-64">
+              <div className="relative flex justify-center items-center">
+                {/* Outer Ring */}
+                <div className="w-12 h-12 border-4 border-transparent border-t-primary border-l-primary rounded-full animate-spin"></div>
+
+                {/* Inner Ring */}
+                <div className="absolute w-8 h-8 border-4 border-transparent border-b-primary border-r-primary rounded-full animate-spin-slow"></div>
+
+                {/* Dot Pulse in Center */}
+                <div className="absolute w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+              </div>
+            </div>
+          </div>
         </div>
       ) : requests.length === 0 ? (
         <p className="text-center text-gray-500 text-lg">
           No service requests found. You can submit a request from our{" "}
-          <Link href="/component/requests/submit" className="text-blue-500 underline">
+          <Link
+            href="/component/requests/submit"
+            className="text-blue-500 underline"
+          >
             Request Page
           </Link>
           .
@@ -102,14 +118,17 @@ const RequestsPage = () => {
                       {item.device.company} - {item.device.series}
                     </h3>
                     <p className="text-gray-600">
-                      <span className="font-semibold">Model:</span> {item.device.model}
+                      <span className="font-semibold">Model:</span>{" "}
+                      {item.device.model}
                     </p>
                     <p className="text-gray-600 mt-1">
-                      <span className="font-semibold">Problem:</span> {item.problem}
+                      <span className="font-semibold">Problem:</span>{" "}
+                      {item.problem}
                     </p>
                     {item.notes && (
                       <p className="text-gray-600 mt-1">
-                        <span className="font-semibold">Notes:</span> {item.notes}
+                        <span className="font-semibold">Notes:</span>{" "}
+                        {item.notes}
                       </p>
                     )}
                     <p className="text-gray-400 mt-2 text-sm">

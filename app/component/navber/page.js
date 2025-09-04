@@ -98,12 +98,14 @@ export function NavigationMenuDemo() {
           <Link
             className="md:px-10 py-2 bg-primary px-10 rounded-2xl text-2xl"
             href="/component/profile"
+            onClick={handleMobileLinkClick}
           >
             <ShoppingCart className="text-white" />
           </Link>
           <Link
             className="md:px-10 py-2 bg-primary px-10 rounded-2xl text-2xl"
             href="/component/my_services"
+            onClick={handleMobileLinkClick}
           >
             <MdBuild className="text-white" />
           </Link>
