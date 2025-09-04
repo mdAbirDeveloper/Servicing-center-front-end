@@ -229,7 +229,7 @@ const ProfilePage = () => {
               onClick={handleBuyNow}
               className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg font-semibold"
             >
-              Buy Now
+              Buy_Now
             </button>
           </div>
         </div>

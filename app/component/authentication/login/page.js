@@ -15,10 +15,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Eye, EyeOff } from "lucide-react"; // 👈 Eye icons
 
 function LogIn() {
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // 👈 নতুন state
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -49,7 +51,6 @@ function LogIn() {
         // user state আপডেট জানাতে event dispatch করো
         window.dispatchEvent(new Event("userLogin"));
 
-        // Refresh এর বদলে সরাসরি redirect করো
         router.push("/");
       }
     } catch (err) {
@@ -60,7 +61,7 @@ function LogIn() {
   };
 
   return (
-    <div className="">
+    <div>
       <Card className="w-full max-w-sm mx-auto mt-24">
         <CardHeader>
           <CardTitle>Login to your account</CardTitle>
@@ -97,13 +98,22 @@ function LogIn() {
                     Forgot your password?
                   </a>
                 </div>
-                <Input
-                  id="password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
+                <div className="relative">
+                  <Input
+                    id="password"
+                    type={showPassword ? "text" : "password"} // 👈 toggle করা হচ্ছে
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                  >
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                </div>
               </div>
               {error && (
                 <p className="text-sm text-red-500 text-center">{error}</p>
