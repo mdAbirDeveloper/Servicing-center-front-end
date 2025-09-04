@@ -151,7 +151,7 @@ export default function Products() {
   return (
     <div>
       {/* 🔹 Carousel */}
-      <div className="relative w-full md:h-[500px] overflow-hidde">
+      <div className="relative w-full md:h-[500px] overflow-hidden">
         <div
           className="flex transition-transform duration-700 ease-in-out"
           style={{ transform: `translateX(-${current * 100}%)` }}
