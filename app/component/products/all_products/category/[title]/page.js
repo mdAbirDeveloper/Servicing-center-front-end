@@ -81,14 +81,26 @@ export default function CategoryPage({ params }) {
     setShowCompanies(false);
   };
 
-  if (loading) return <div className="flex justify-center items-center min-h-screen">
-        <div className="flex flex-col items-center">
-          <div className="w-16 h-16 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
-          <p className="mt-4 text-gray-700 text-lg font-medium">
- 
-          </p>
+  if (loading)
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="flex justify-center items-center h-64">
+          {/* Modern Stylish Loading Spinner */}
+          <div className="flex justify-center items-center h-64">
+            <div className="relative flex justify-center items-center">
+              {/* Outer Ring */}
+              <div className="w-12 h-12 border-4 border-transparent border-t-primary border-l-primary rounded-full animate-spin"></div>
+
+              {/* Inner Ring */}
+              <div className="absolute w-8 h-8 border-4 border-transparent border-b-primary border-r-primary rounded-full animate-spin-slow"></div>
+
+              {/* Dot Pulse in Center */}
+              <div className="absolute w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+            </div>
+          </div>
         </div>
-      </div>;
+      </div>
+    );
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
@@ -151,50 +163,52 @@ export default function CategoryPage({ params }) {
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {filteredData.map((item, index) => (
-                <Link key={index} href={`/component/products/all_products/product_details/${item._id}`}>
-                    <div
-                      key={index}
-                      className="bg-white rounded-xl shadow hover:shadow-2xl hover:shadow-primary transition transform hover:-translate-y-2 p-3 relative"
-                    >
-                      {/* Discount Badge */}
-                      {item.discountPrice && item.price && (
-                        <span className="absolute top-2 right-2 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded">
-                          -
-                          {Math.round(
-                            ((item.price - item.discountPrice) / item.price) *
-                              100
-                          )}
-                          %
-                        </span>
-                      )}
-
-                      {/* Product Image */}
-                      <div className="w-full h-40 sm:h-48 flex items-center justify-center">
-                        <img
-                          src={item.image.image}
-                          alt={item.title}
-                          className="max-h-full object-contain"
-                        />
-                      </div>
-
-                      {/* Product Title */}
-                      <h3 className="text-sm font-medium mt-3 text-gray-800 line-clamp-2">
-                        {item.title}
-                      </h3>
-
-                      {/* Price */}
-                      <div className="mt-2">
-                        {item.price && (
-                          <p className="text-gray-400 line-through text-sm">
-                            {item.price} TK
-                          </p>
+                <Link
+                  key={index}
+                  href={`/component/products/all_products/product_details/${item._id}`}
+                >
+                  <div
+                    key={index}
+                    className="bg-white rounded-xl shadow hover:shadow-2xl hover:shadow-primary transition transform hover:-translate-y-2 p-3 relative"
+                  >
+                    {/* Discount Badge */}
+                    {item.discountPrice && item.price && (
+                      <span className="absolute top-2 right-2 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded">
+                        -
+                        {Math.round(
+                          ((item.price - item.discountPrice) / item.price) * 100
                         )}
-                        <p className="text-lg font-semibold text-orange-600">
-                          {item.discountPrice} TK
-                        </p>
-                      </div>
+                        %
+                      </span>
+                    )}
+
+                    {/* Product Image */}
+                    <div className="w-full h-40 sm:h-48 flex items-center justify-center">
+                      <img
+                        src={item.image.image}
+                        alt={item.title}
+                        className="max-h-full object-contain"
+                      />
                     </div>
-                  </Link>
+
+                    {/* Product Title */}
+                    <h3 className="text-sm font-medium mt-3 text-gray-800 line-clamp-2">
+                      {item.title}
+                    </h3>
+
+                    {/* Price */}
+                    <div className="mt-2">
+                      {item.price && (
+                        <p className="text-gray-400 line-through text-sm">
+                          {item.price} TK
+                        </p>
+                      )}
+                      <p className="text-lg font-semibold text-orange-600">
+                        {item.discountPrice} TK
+                      </p>
+                    </div>
+                  </div>
+                </Link>
               ))}
             </div>
           )}

@@ -218,6 +218,28 @@ const AllProducts = () => {
     }
   };
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="flex justify-center items-center h-64">
+          {/* Modern Stylish Loading Spinner */}
+          <div className="flex justify-center items-center h-64">
+            <div className="relative flex justify-center items-center">
+              {/* Outer Ring */}
+              <div className="w-12 h-12 border-4 border-transparent border-t-primary border-l-primary rounded-full animate-spin"></div>
+
+              {/* Inner Ring */}
+              <div className="absolute w-8 h-8 border-4 border-transparent border-b-primary border-r-primary rounded-full animate-spin-slow"></div>
+
+              {/* Dot Pulse in Center */}
+              <div className="absolute w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-6xl mx-auto mt-10">
       <Card className="overflow-x-auto">

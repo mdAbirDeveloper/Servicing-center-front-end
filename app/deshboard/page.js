@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation"; // App router
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, DollarSign, Users, TrendingUp } from "lucide-react";
+import Link from "next/link";
 
 const Dashboard = () => {
   const [orders, setOrders] = useState([]);
@@ -47,7 +48,9 @@ const Dashboard = () => {
         const totalOrders = allOrders.length;
         const cart = allOrders.filter((o) => o.status === "cart").length;
         const ordered = allOrders.filter((o) => o.status === "ordered").length;
-        const delivered = allOrders.filter((o) => o.status === "delivered").length;
+        const delivered = allOrders.filter(
+          (o) => o.status === "delivered"
+        ).length;
         setCounts({ totalOrders, cart, ordered, delivered });
 
         // Users fetch
@@ -75,11 +78,20 @@ const Dashboard = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <div className="flex flex-col items-center">
-          <div className="w-16 h-16 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
-          <p className="mt-4 text-gray-700 text-lg font-medium">
- 
-          </p>
+        <div className="flex justify-center items-center h-64">
+          {/* Modern Stylish Loading Spinner */}
+          <div className="flex justify-center items-center h-64">
+            <div className="relative flex justify-center items-center">
+              {/* Outer Ring */}
+              <div className="w-12 h-12 border-4 border-transparent border-t-primary border-l-primary rounded-full animate-spin"></div>
+
+              {/* Inner Ring */}
+              <div className="absolute w-8 h-8 border-4 border-transparent border-b-primary border-r-primary rounded-full animate-spin-slow"></div>
+
+              {/* Dot Pulse in Center */}
+              <div className="absolute w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -101,7 +113,7 @@ const Dashboard = () => {
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-gray-800">Dashboard</h1>
-        <Button className="rounded-2xl shadow-md">+ Add New</Button>
+        <Button className="rounded-2xl shadow-md"><Link href={"/deshboard/product/add_product"}>+ Add New</Link></Button>
       </div>
 
       {/* Cards */}

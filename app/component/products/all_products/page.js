@@ -113,7 +113,9 @@ export default function Products() {
   // 🔹 Fetch products
   useEffect(() => {
     setLoading(true);
-    fetch(`https://servicing-center-server.vercel.app/api/v1/product/all-products`)
+    fetch(
+      `https://servicing-center-server.vercel.app/api/v1/product/all-products`
+    )
       .then((res) => res.json())
       .then((data) => {
         setCategoryData(data.data || []);
@@ -334,17 +336,29 @@ export default function Products() {
           <div className="md:col-span-3">
             {loading ? (
               <div className="flex justify-center items-center h-64">
-                {/* Spinner */}
-                <div className="relative flex justify-center items-center">
-                  <div className="w-12 h-12 border-4 border-transparent border-t-primary border-l-primary rounded-full animate-spin"></div>
-                  <div className="absolute w-8 h-8 border-4 border-transparent border-b-primary border-r-primary rounded-full animate-spin-slow"></div>
-                  <div className="absolute w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+                <div className="flex justify-center items-center h-64">
+                  {/* Modern Stylish Loading Spinner */}
+                  <div className="flex justify-center items-center h-64">
+                    <div className="relative flex justify-center items-center">
+                      {/* Outer Ring */}
+                      <div className="w-12 h-12 border-4 border-transparent border-t-primary border-l-primary rounded-full animate-spin"></div>
+
+                      {/* Inner Ring */}
+                      <div className="absolute w-8 h-8 border-4 border-transparent border-b-primary border-r-primary rounded-full animate-spin-slow"></div>
+
+                      {/* Dot Pulse in Center */}
+                      <div className="absolute w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+                    </div>
+                  </div>
                 </div>
               </div>
             ) : filteredData.length > 0 ? (
               <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                 {filteredData.map((item, index) => (
-                  <Link key={index} href={`/component/products/all_products/product_details/${item._id}`}>
+                  <Link
+                    key={index}
+                    href={`/component/products/all_products/product_details/${item._id}`}
+                  >
                     <div
                       key={index}
                       className="bg-white rounded-xl shadow hover:shadow-2xl hover:shadow-primary transition transform hover:-translate-y-2 p-3 relative"

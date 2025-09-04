@@ -62,11 +62,20 @@ const AllUsers = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <div className="flex flex-col items-center">
-          <div className="w-16 h-16 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
-          <p className="mt-4 text-gray-700 text-lg font-medium">
- 
-          </p>
+        <div className="flex justify-center items-center h-64">
+          {/* Modern Stylish Loading Spinner */}
+          <div className="flex justify-center items-center h-64">
+            <div className="relative flex justify-center items-center">
+              {/* Outer Ring */}
+              <div className="w-12 h-12 border-4 border-transparent border-t-primary border-l-primary rounded-full animate-spin"></div>
+
+              {/* Inner Ring */}
+              <div className="absolute w-8 h-8 border-4 border-transparent border-b-primary border-r-primary rounded-full animate-spin-slow"></div>
+
+              {/* Dot Pulse in Center */}
+              <div className="absolute w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -93,9 +102,7 @@ const AllUsers = () => {
                   <td className="border border-gray-300 px-4 py-2">
                     {index + 1}
                   </td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    {u.name}
-                  </td>
+                  <td className="border border-gray-300 px-4 py-2">{u.name}</td>
                   <td className="border border-gray-300 px-4 py-2">
                     {u.phone}
                   </td>

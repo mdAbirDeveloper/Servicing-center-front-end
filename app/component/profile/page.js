@@ -45,7 +45,7 @@ const ProfilePage = () => {
 
       setCartItems(cart);
       setOrderedItems(orders);
-      setDeliveredItems(delivered)
+      setDeliveredItems(delivered);
     } catch (err) {
       console.error(err);
     } finally {
@@ -54,31 +54,37 @@ const ProfilePage = () => {
   };
 
   const handleBuyNow = async () => {
-  const user = getCurrentUserFromLocalStorage();
-  if (!user) return;
+    const user = getCurrentUserFromLocalStorage();
+    if (!user) return;
 
-  // Cart থেকে product IDs নিয়ে যেই array backend এ পাঠানো হবে
-  const productIds = cartItems.map((item) => item._id);
+    // Cart থেকে product IDs নিয়ে যেই array backend এ পাঠানো হবে
+    const productIds = cartItems.map((item) => item._id);
 
-  try {
-    const res = await fetch(`https://servicing-center-server.vercel.app/api/v1/order-items/buy-now`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ phone: user.phone, email: user.email, productIds }),
-    });
+    try {
+      const res = await fetch(
+        `https://servicing-center-server.vercel.app/api/v1/order-items/buy-now`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            phone: user.phone,
+            email: user.email,
+            productIds,
+          }),
+        }
+      );
 
-    if (res.ok) {
-      alert("Order placed successfully!");
-      fetchUserOrders(); // Cart এবং Ordered items update
-    } else {
-      alert("Failed to place order");
+      if (res.ok) {
+        alert("Order placed successfully!");
+        fetchUserOrders(); // Cart এবং Ordered items update
+      } else {
+        alert("Failed to place order");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong!");
     }
-  } catch (err) {
-    console.error(err);
-    alert("Something went wrong!");
-  }
-};
-
+  };
 
   const handleDelete = async (id) => {
     if (!confirm("Are you sure to delete this item?")) return;
@@ -121,8 +127,21 @@ const ProfilePage = () => {
       {/* ✅ Loading Spinner */}
       {loading && (
         <div className="flex justify-center items-center mb-6">
-          <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-          <span className="ml-3 text-blue-600 font-semibold">Loading...</span>
+          <div className="flex justify-center items-center h-64">
+            {/* Modern Stylish Loading Spinner */}
+            <div className="flex justify-center items-center h-64">
+              <div className="relative flex justify-center items-center">
+                {/* Outer Ring */}
+                <div className="w-12 h-12 border-4 border-transparent border-t-primary border-l-primary rounded-full animate-spin"></div>
+
+                {/* Inner Ring */}
+                <div className="absolute w-8 h-8 border-4 border-transparent border-b-primary border-r-primary rounded-full animate-spin-slow"></div>
+
+                {/* Dot Pulse in Center */}
+                <div className="absolute w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+              </div>
+            </div>
+          </div>
         </div>
       )}
 

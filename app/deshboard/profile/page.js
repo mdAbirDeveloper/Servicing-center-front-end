@@ -121,8 +121,21 @@ const ProfilePage = () => {
       {/* ✅ Loading Spinner */}
       {loading && (
         <div className="flex justify-center items-center mb-6">
-          <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-          <span className="ml-3 text-blue-600 font-semibold">Loading...</span>
+          <div className="flex justify-center items-center h-64">
+          {/* Modern Stylish Loading Spinner */}
+          <div className="flex justify-center items-center h-64">
+            <div className="relative flex justify-center items-center">
+              {/* Outer Ring */}
+              <div className="w-12 h-12 border-4 border-transparent border-t-primary border-l-primary rounded-full animate-spin"></div>
+
+              {/* Inner Ring */}
+              <div className="absolute w-8 h-8 border-4 border-transparent border-b-primary border-r-primary rounded-full animate-spin-slow"></div>
+
+              {/* Dot Pulse in Center */}
+              <div className="absolute w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+            </div>
+          </div>
+        </div>
         </div>
       )}
 
